@@ -10,10 +10,12 @@ import log
 import req
 
 logger = log.configure_log('root')
-BOT_NAME = '42helper'
+BOT_NAME = 'marvin'
 BOT_ID = os.environ.get('BOT_ID')
 AT_BOT = '<@' + BOT_ID + '>'
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+
+
 
 def direct_handler(message):
     '''
@@ -59,11 +61,12 @@ def translate_handler(token, message, lang_in, lang_out='en'):
 def perform_filtering(message):
     '''
     Removes bad texts and replaces with a safe message
+    U5YJPQDQ9
     ''' 
     ts = message['ts']
     channel = message['channel']
     response = ("I sense a disturbance in the force.:disappointed:\n"
-                "@staff has been notified")
+                "<@staff> has been notified")
     slack_client.api_call("chat.postMessage", channel=channel,
                           text=response, as_user=True)
 
