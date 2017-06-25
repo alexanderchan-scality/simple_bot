@@ -23,9 +23,13 @@ def direct_handler(message):
     '''
     response = req.qna_req(message['text'])
     if response == "open_sesame":
-        os.system("curl http://104.196.193.136:5000/open")
+        os.system("curl http://127.0.0.1:5000/open")
         slack_client.api_call("chat.postMessage", channel=message['channel'],
                               text="Come on in.", as_user=True)
+    elif response == "No good match found in the KB":
+        response = "Sorry, can't help you with that. Please try rephrasing the question"
+        slack_client.api_call("chat.postMessage", channel=message['channel'],
+                              text=response, as_user=True)
     else:
         if not response:
             response = "Unable to pull answer from knowledge base."
